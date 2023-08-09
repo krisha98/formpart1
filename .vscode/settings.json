@@ -1,0 +1,27 @@
+{
+    "cSpell.words": [
+        "addsubject",
+        "anly",
+        "aplabets",
+        "Bloodgroup",
+        "bloodgrp",
+        "contect",
+        "Detailsflag",
+        "emailid",
+        "Emailid",
+        "inputrestriction",
+        "mobileno",
+        "pincode",
+        "Pincode",
+        "pincodeservice",
+        "removesubject"
+    ],
+    "cSpell.customDictionaries": {
+        "custom-dictionary-workspace": {
+            "name": "custom-dictionary-workspace",
+            "path": "${workspaceFolder:form}/.cspell/custom-dictionary-workspace.txt",
+            "addWords": true,
+            "scope": "workspace"
+        }
+    }
+}

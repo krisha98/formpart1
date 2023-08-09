@@ -1,0 +1,3 @@
+# Custom Dictionary Words
+import { PincodeService } from './app/pincode-service.service';
+krisha

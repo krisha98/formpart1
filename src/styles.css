@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Centers vertically in the viewport */
+  text-align: center;
+}
+
+.labelClass {
+  float: left;
+  width: 113px;
+  padding-left: 15px;
+}
+
+/* form {
+  text-align: center;
+} */
+
+.mat-radio-button~.mat-radio-button {
+  margin-left: 16px;
+}
