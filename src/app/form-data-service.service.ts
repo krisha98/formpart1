@@ -21,7 +21,7 @@ export class FormDataService {
       subject: []
     }
   ];
-  private id = 0;
+  private id = 1;
   addFormData(data: any) {
     data.id = this.id++;
     this.formData.push(data);

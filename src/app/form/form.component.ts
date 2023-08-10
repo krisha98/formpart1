@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PincodeService } from '../pincode-service.service';
 import { FormDataService } from '../form-data-service.service';
 
-
 function alphabeticValidator(control: AbstractControl): { [key: string]: any } | null {
   const valid = /^[a-zA-Z ]*$/.test(control.value);
   return valid ? null : { alphabetic: true };
@@ -144,16 +143,19 @@ get hob() {
 login() {
   const formData = this.user.value;
   if (this.user.valid && !this.fetchingPincodeDetailsflag) {
-    if(this.prefilledData.id!=-1){
+    if(this.iseditmode){
       this.formDataService.updateEntry(this.prefilledData.id, formData);
-    }else{
+    }
+    else{
       this.formDataService.addFormData(this.user.value);
     }
     this.user.reset();
   }
-
  
-}
+ 
+ }
+ 
+ iseditmode:boolean=false;
 
   ngOnInit(): void {
     
@@ -163,6 +165,7 @@ login() {
         console.log('Received ID:', id);
         this.prefilledData = history.state.prefilledData;
         console.log(this.prefilledData)
+        if(this.prefilledData){
         this.dataGet1 = this.prefilledData;
         this.user.controls.name.setValue(this.dataGet1.name)
         this.user.controls.password.setValue(this.dataGet1.password)
@@ -173,7 +176,8 @@ login() {
         this.user.controls.pin.setValue(this.dataGet1.pin)
         this.user.controls.bld.setValue(this.dataGet1.bld)
         this.user.controls.branch.setValue(this.dataGet1.branch)
-
+        this.iseditmode=true;
+      }
         // this.user = this.formBuilder.group({
         //   name: new FormControl(this.prefilledData.name), // Initialize with pre-filled data
         //   password: new FormControl(this.prefilledData.password),

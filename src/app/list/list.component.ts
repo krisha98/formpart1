@@ -8,21 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-formData:any[]=[];
+  formData: any[] = [];
 
-  constructor(private formDataService:FormDataService, private router: Router) { }
+  constructor(private formDataService: FormDataService, private router: Router) { }
 
   ngOnInit(): void {
-    this.formData=this.formDataService.getFormData()
+    this.formData = this.formDataService.getFormData()
   }
   deleteData(index: number) {
     this.formData.splice(index, 1); // Remove data from the array
   }
   editData(data: any) {
     console.log(data)
-    this.router.navigate([`/form`,data.id],{ state: { prefilledData: data } });
+    this.router.navigate([`/form`, data.id], { state: { prefilledData: data } });
     // this.data = this.getAll();
     console.log(data.id)
 
-}
+  }
 }
