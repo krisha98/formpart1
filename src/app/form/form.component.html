@@ -1,193 +1,159 @@
 <h1>{{title}}</h1>
-<form [formGroup]="user"  novalidate>
-  
-    <label>Enter Name:</label>
-    <mat-form-field appearance="fill">
-      <mat-label>Name</mat-label>
-      <input type="text" matInput placeholder="Full Name" formControlName="name" maxlength="40">
-      <mat-error *ngIf="user.get('name').hasError('required')">
-        Name is Required!
-      </mat-error>
-      <mat-error *ngIf="user.get('name').hasError('maxlength')">
-        Name can contain 40 characters only!
-      </mat-error>
-    </mat-form-field>
-    <!-- <input type="text" placeholder="Enter Name" name="user" formControlName="name"> -->
-    <br><br>
-    <label>Enter Password:</label>
-    <mat-form-field appearance="fill">
-      <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field>
-    <!-- <input type="password" placeholder="Enter Password" name="password" formControlName="password"> -->
-    <br><br>
-    <label>Enter Mobile Number:</label>
-    <mat-form-field appearance="fill">
-      <mat-label>Telephone</mat-label>
-      <input type="tel" matInput placeholder="+91-8160425777" formControlName="mob">
-      <mat-error *ngIf="user.get('mob').hasError('required')">
-        mobile is Required!
-      </mat-error>
-      <mat-error *ngIf="user.get('mob').hasError('pattern')">
-        Enter valid Number
-      </mat-error>
-    </mat-form-field>
-    <!-- <input type="tel" placeholder="Enter mobile number" name="mob" formControlName="mob"> -->
-    <br><br>
-    <label>Enter Emailid:</label>
-    <!-- <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput placeholder="xyz@yahoo.com">
-    </mat-form-field> -->
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
-      <mat-error *ngIf="user.get('email')?.hasError('email') && !user.get('email')?.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="user.get('email')?.hasError('required')">Email is <strong>required</strong></mat-error>
-    </mat-form-field>
-    <!-- <input type="email" placeholder="Enter emailid" name="email" formControlName="email"> -->
-    <br><br>
-    <label>Enter Date of Birth:</label>
-    <mat-form-field appearance="fill">
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="dob">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="user.controls['dob'].hasError('matDatepickerParse')">
-        Invalid date
-      </mat-error>
-      <mat-error *ngIf="user.get('dob').hasError('required')">Date of Birth is required</mat-error>
-      <!-- <mat-error *ngIf="user.get('dob').hasError('required')">
-        Date is Required!
-      </mat-error> -->
-    </mat-form-field>
-    <!-- <input type="date" placeholder="Enter DOB" name="dob" formControlName="dob"> -->
-    <br><br>
-    <label>Gender:</label>
-    <mat-radio-group aria-label="Select an option">
-      <mat-radio-button value="1">Male</mat-radio-button>
-      <!-- <mat-divider [inset]="true"></mat-divider> -->
-      <mat-radio-button value="2" checked> Female </mat-radio-button>
-      <!-- <mat-divider [vertical]="true"></mat-divider> -->
-      <mat-radio-button value="3"> Others </mat-radio-button>
-      <!-- <mat-divider></mat-divider> -->
-    </mat-radio-group>
-    <br><br>
-    <!-- <input type="radio" name="gender" value="male"> Male
-    <input type="radio" name="gender" value="female"> Female
-    <input type="radio" name="gender" value="others"> Other -->
-    <!-- <label>Hobbies:</label>
-    <div *ngIf="hob.invalid"> 
-      select the field.
-  </div> 
-    <mat-checkbox formControlName="hob" required>
-      Dancing
-    </mat-checkbox>
-    <mat-checkbox>
-      Signing
-    </mat-checkbox>
-   <br><br> -->
-    <label>Enter Address:</label>
-    <mat-form-field appearance="fill">
-      <mat-label>Address</mat-label>
-      <input type="text" matInput placeholder="Address" formControlName="add">
-      <mat-error *ngIf="user.get('add').hasError('required')">
-        Address is Required!
-      </mat-error>
-      <mat-error *ngIf="user.get('add').hasError('maxlength')">
-        Address can contain 200 characters only!
-      </mat-error>
-    </mat-form-field>
-    <br>
-    <br>
-    <!-- <input type="text" placeholder="Enter address" name="address" formControlName="add"> -->
-    <!-- <label>Country</label>
-    <mat-form-field appearance="fill">
-      <mat-label>Select</mat-label>
-      <mat-select>
-        <mat-option value="option">India</mat-option>
-        <mat-option value="2">America</mat-option>
-        <mat-option value="3">China </mat-option>
-        <mat-option value="option">Nepal </mat-option>
-      </mat-select>
-    </mat-form-field> -->
-    <!-- <label>Enter Pincode:</label>
-    <mat-form-field>
-      <mat-label>Postal Code</mat-label>
-      <input matInput #postalCode maxlength="6" placeholder="Ex. 94105" formControlName="pin">
-      <mat-hint align="end">{{postalCode.value.length}} / 6</mat-hint>
-  
-    </mat-form-field> -->
-    <!-- <input type="number" placeholder="Enter pincode" name="pincode" formControlName="pin"> -->
-    <label>Enter Pincode:</label>
-    <mat-form-field>
-      <input matInput #pincodeInput placeholder="Enter pincode" formControlName="pin">
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="fetchPincodeDetails(pincodeInput.value)">Get Details</button>
-    <br>
-    <!-- Add the new form controls for country, state, and city -->
-    <label>Country:</label>
-    <mat-form-field>
-      <input matInput placeholder="Country" formControlName="country" disabled>
-    </mat-form-field>
-    
-    <label>State:</label>
-    <mat-form-field>
-      <input matInput placeholder="State" formControlName="state" disabled>
-    </mat-form-field>
-    
-    <label>City:</label>
-    <mat-form-field>
-      <input matInput placeholder="City" formControlName="city" disabled>
-    </mat-form-field>
+<form class="ng-touched" [formGroup]="user" novalidate>
+
+  <label>Enter Name:</label>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput placeholder="Full Name" formControlName="name" maxlength="40">
+    <mat-error *ngIf="user.get('name').hasError('required')">
+      Name is Required!
+    </mat-error>
+    <mat-error *ngIf="user.get('name').hasError('maxlength')">
+      Name can contain 40 characters only!
+    </mat-error>
+  </mat-form-field>
+  <!-- <input type="text" placeholder="Enter Name" name="user" formControlName="name"> -->
   <br><br>
-    <label>Enter Bloodgroup:</label>
-    <mat-form-field appearance="fill">
-      <mat-label>Blood Group </mat-label>
-      <input matInput placeholder="Ex AB+" formControlName="bld">
-      <mat-error *ngIf="user.get('bld').hasError('required')">
-        Blood group Required!
-      </mat-error>
-      <mat-error *ngIf="user.get('bld').hasError('pattern')">
-        Enter valid Blood Group!
-      </mat-error>
-    </mat-form-field>
-    <br><br>
-    <label>Branch:</label>
-    <mat-form-field appearance="fill">
-      <mat-label>Branch</mat-label>
-      <input matInput type="text" placeholder="Information Technology/IT" [inputrestriction]="'[a-zA-Z]'" formControlName="branch" >
-    </mat-form-field>
-    
-    <div *ngIf="user.get('branch').invalid && user.get('branch').touched">
-      <div *ngIf="user.get('branch').errors.required">Branch is required.</div>
-      <div *ngIf="user.get('branch').hasError('pattern')">Only alphabetic characters are allowed.</div>
-    </div>
-  <!-- pattern="^[A-Za-z]+$" -->
-  
-    <div formArrayName="subject">
-      <div *ngFor="let subject of subject.controls; let i=index">
-        <div [formGroupName]="i">
-          {{i}}
-          <label> Subject name : </label>
-          <input type="text" formControlName="subject">
-          <button (click)="removesubject(i)">Remove</button>
-        </div>
+  <label>Enter Password:</label>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-error *ngIf="user.get('password').hasError('required')">
+      Password is Required!
+    </mat-error>
+  </mat-form-field>
+  <!-- <input type="password" placeholder="Enter Password" name="password" formControlName="password"> -->
+  <br><br>
+  <label>Enter Mobile Number:</label>
+  <mat-form-field appearance="fill">
+    <mat-label>Telephone</mat-label>
+    <input type="tel" matInput placeholder="+91-8160425777" formControlName="mob">
+    <mat-error *ngIf="user.get('mob').hasError('required')">
+      mobile is Required!
+    </mat-error>
+    <mat-error *ngIf="user.get('mob').hasError('pattern')">
+      Enter valid Number
+    </mat-error>
+  </mat-form-field>
+  <!-- <input type="tel" placeholder="Enter mobile number" name="mob" formControlName="mob"> -->
+  <br><br>
+  <label>Enter Emailid:</label>
+  <mat-form-field class="example-full-width">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+    <mat-error *ngIf="user.get('email')?.hasError('email') && !user.get('email')?.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="user.get('email')?.hasError('required')">Email is <strong>required</strong></mat-error>
+  </mat-form-field>
+  <!-- <input type="email" placeholder="Enter emailid" name="email" formControlName="email"> -->
+  <br><br>
+  <label>Enter Date of Birth:</label>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dob">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="user.controls['dob'].hasError('matDatepickerParse')">
+      Invalid date
+    </mat-error>
+    <mat-error *ngIf="user.get('dob').hasError('required') && !user.controls['dob'].hasError('matDatepickerParse')">Date
+      of Birth is required</mat-error>
+  </mat-form-field>
+  <!-- <input type="date" placeholder="Enter DOB" name="dob" formControlName="dob"> -->
+  <br><br>
+  <label>Gender:</label>
+  <mat-radio-group aria-label="Select an option">
+    <mat-radio-button value="1">Male</mat-radio-button>
+    <!-- <mat-divider [inset]="true"></mat-divider> -->
+    <mat-radio-button value="2" checked> Female </mat-radio-button>
+    <!-- <mat-divider [vertical]="true"></mat-divider> -->
+    <mat-radio-button value="3"> Others </mat-radio-button>
+    <!-- <mat-divider></mat-divider> -->
+  </mat-radio-group>
+  <br><br>
+  <label>Enter Address:</label>
+  <mat-form-field appearance="fill">
+    <mat-label>Address</mat-label>
+    <input type="text" matInput placeholder="Address" formControlName="add">
+    <mat-error *ngIf="user.get('add').hasError('required')">
+      Address is Required!
+    </mat-error>
+    <mat-error *ngIf="user.get('add').hasError('maxlength')">
+      Address can contain 200 characters only!
+    </mat-error>
+  </mat-form-field>
+  <br>
+  <br>
+  <label>Enter Pincode:</label>
+  <mat-form-field>
+    <input matInput #pincodeInput placeholder="Enter pincode" formControlName="pin">
+    <mat-error *ngIf="user.get('pin').hasError('required')">
+      Enter valid Pin-code Number!
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="button" (click)="fetchPincodeDetails(pincodeInput.value)">Get
+    Details</button>
+  <br>
+  <!-- Add the new form controls for country, state, and city -->
+  <label>Country:</label>
+  <mat-form-field>
+    <input matInput placeholder="Country" formControlName="country" disabled>
+  </mat-form-field>
+
+  <label>State:</label>
+  <mat-form-field>
+    <input matInput placeholder="State" formControlName="state" disabled>
+  </mat-form-field>
+
+  <label>City:</label>
+  <mat-form-field>
+    <input matInput placeholder="City" formControlName="city" disabled>
+  </mat-form-field>
+  <br><br>
+  <label>Enter Bloodgroup:</label>
+  <mat-form-field appearance="fill">
+    <mat-label>Blood Group </mat-label>
+    <input matInput placeholder="Ex AB+" formControlName="bld">
+    <mat-error *ngIf="user.get('bld').hasError('required') ">
+      Blood group Required!
+    </mat-error>
+    <mat-error *ngIf="user.get('bld').hasError('pattern') ">
+      Enter valid Blood Group!
+    </mat-error>
+  </mat-form-field>
+  <br><br>
+  <label>Branch:</label>
+  <mat-form-field appearance="fill">
+    <mat-label>Branch</mat-label>
+    <input matInput type="text" placeholder="Information Technology/IT" [inputrestriction]="'[a-zA-Z]'"
+      formControlName="branch">
+
+    <mat-error *ngIf="user.get('branch').hasError('required') ">
+      Branch is Required!
+    </mat-error>
+  </mat-form-field>
+  <div formArrayName="subject">
+    <div *ngFor="let subject of subject.controls; let i=index">
+      <div [formGroupName]="i">
+        {{i}}
+        <label> Subject name : </label>
+        <input type="text" formControlName="subject">
+        <button (click)="removesubject(i)">Remove</button>
       </div>
     </div>
-    <p>
-      <button type="button" (click)="addsubject()" [disabled]="subject.length >= 5" >AddSubject</button>
-  
-    </p>
+  </div>
+  <p>
+    <button type="button" (click)="addsubject()" [disabled]="subject.length >= 5">AddSubject</button>
+
+  </p>
   <br><br>
+
   <button mat-raised-button matTooltip="verify than submit" matTooltipClass="example-tooltip-red" mat-raised-button
-  color="primary" [disabled]="!user.valid && !fetchingPincodeDetails" (click)="login()">Submit</button>
-    <br><br>
-  </form>
-  <!-- (ngSubmit)="login()" -->
+    color="primary" [disabled]="!user.valid && !fetchingPincodeDetails" (click)="login()">Submit</button>
+  <br><br>
+</form>
