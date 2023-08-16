@@ -24,6 +24,7 @@ export class FormDataService {
   private id = 1;
   addFormData(data: any) {
     data.id = this.id++;
+    data.subject = data.subject.map((subjectObj: any) => subjectObj.subject);
     this.formData.push(data);
   }
 
@@ -44,7 +45,18 @@ export class FormDataService {
       return index;
     }
   }
+  
+  // Add a method to get subject values from form data
+  getSubjectValues() {
+    const subjectValues: string[] = [];
+    for (const formData of this.formData) {
+      const subjects = formData.subject as string[];
+      subjectValues.push(...subjects);
+    }
+    return subjectValues;
+  }
 
+}
   // Create new entry
   // createEntry(newData) {
   //   const id = this.data.length + 1;
@@ -52,7 +64,7 @@ export class FormDataService {
   //   this.data.push(newEntry);
   //   return newEntry; // Return the newly created entry
   // }
-}
+
 //    // Update existing entry by ID
 //    updateEntry(id: number, updatedData: any): void {
 //     const index = this.data.findIndex(item => item.id === id);

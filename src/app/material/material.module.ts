@@ -15,7 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 let a = [MatButtonModule,
   MatTableModule,
@@ -31,6 +31,7 @@ let a = [MatButtonModule,
   MatDividerModule,
   MatToolbarModule,
   MatTooltipModule,
+  MatProgressSpinnerModule,
    ]
 
 @NgModule({

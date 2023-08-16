@@ -16,6 +16,7 @@ export class InputRestrictionDirective {
   handleKeyPress(event : KeyboardEvent)
   {
     var regex = new RegExp(this.InputRestriction);
+// sourcery skip: invert-ternary
     var str = String.fromCharCode(!event.charCode ? event.which : event.charCode);
     if (regex.test(str)) {
         return true;

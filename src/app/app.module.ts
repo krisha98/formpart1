@@ -13,6 +13,8 @@ import { PincodeService } from './pincode-service.service';
 import { InputRestrictionDirective } from './alphabet-only.directive';
 import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
+import { DialogFormDataComponent } from './dialog-form-data/dialog-form-data.component';
+import { DatePipe } from '@angular/common'; // Import DatePipe
 
 
 
@@ -22,6 +24,7 @@ import { FormComponent } from './form/form.component';
     InputRestrictionDirective,
     ListComponent,
     FormComponent,
+    DialogFormDataComponent,
    
    
 ],
@@ -32,10 +35,11 @@ import { FormComponent } from './form/form.component';
     MaterialModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatDialogModule,
     // MatDialogModule
     // MatButtonModule
   ],
-  providers: [PincodeService],
+  providers: [PincodeService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

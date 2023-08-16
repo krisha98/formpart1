@@ -1,0 +1,14 @@
+<p><strong>Name:</strong> {{ data.name }}</p>
+<p><strong>Password:</strong> {{ data.password}}</p>
+<p><strong>Mobile Number:</strong> {{ data.mob}}</p>
+<p><strong>Email:</strong> {{ data.email }}</p>
+<p><strong>Date of Birth:</strong> {{ data.dob | date:'dd/MM/yyyy' }}</p>
+<p><strong>Address:</strong> {{ data.add }}</p>
+<p><strong>pincode:</strong> {{ data.pin }}</p>
+<p><strong>Bloodgroup:</strong> {{ data.bld }}</p>
+<p><strong>Branch:</strong> {{ data.branch }}</p>
+<!-- <div *ngFor="let subjectControl of subject.controls; let i = index">
+    Subject {{ i + 1 }}: {{ subjectControl.get('subject').value }}
+  </div>  -->
+<button mat-raised-button>Edit</button>
+<button mat-raised-button color="primary" onClick="confirm()">Confirm</button>

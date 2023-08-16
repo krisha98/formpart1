@@ -55,7 +55,8 @@
   <label>Enter Date of Birth:</label>
   <mat-form-field appearance="fill">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" formControlName="dob">
+    <input matInput [matDatepicker]="picker"  formControlName="dob" value="{{toDate | date:'longDate'}}">
+    <mat-hint>DD/MM/YYYY</mat-hint>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
     <mat-error *ngIf="user.controls['dob'].hasError('matDatepickerParse')">
@@ -64,6 +65,7 @@
     <mat-error *ngIf="user.get('dob').hasError('required') && !user.controls['dob'].hasError('matDatepickerParse')">Date
       of Birth is required</mat-error>
   </mat-form-field>
+  <p>Formatted Date: {{ getFormattedDate() }}</p>
   <!-- <input type="date" placeholder="Enter DOB" name="dob" formControlName="dob"> -->
   <br><br>
   <label>Gender:</label>
@@ -91,13 +93,16 @@
   <br>
   <label>Enter Pincode:</label>
   <mat-form-field>
-    <input matInput #pincodeInput placeholder="Enter pincode" formControlName="pin">
+    <input matInput #pincodeInput placeholder="Enter pincode" formControlName="pin" a="updateFormattedDate()">
     <mat-error *ngIf="user.get('pin').hasError('required')">
       Enter valid Pin-code Number!
     </mat-error>
   </mat-form-field>
   <button mat-raised-button color="primary" type="button" (click)="fetchPincodeDetails(pincodeInput.value)">Get
-    Details</button>
+    Details</button> 
+    <mat-progress-spinner  *ngIf="fetchingPincodeDetails"  mode="indeterminate"diameter="20">
+    </mat-progress-spinner>
+    
   <br>
   <!-- Add the new form controls for country, state, and city -->
   <label>Country:</label>
@@ -140,7 +145,7 @@
   <div formArrayName="subject">
     <div *ngFor="let subject of subject.controls; let i=index">
       <div [formGroupName]="i">
-        {{i}}
+        {{i+1}}
         <label> Subject name : </label>
         <input type="text" formControlName="subject">
         <button (click)="removesubject(i)">Remove</button>
@@ -153,7 +158,37 @@
   </p>
   <br><br>
 
-  <button mat-raised-button matTooltip="verify than submit" matTooltipClass="example-tooltip-red" mat-raised-button
-    color="primary" [disabled]="!user.valid && !fetchingPincodeDetails" (click)="login()">Submit</button>
+  <!-- <button mat-raised-button matTooltip="verify than submit" matTooltipClass="example-tooltip-red" mat-raised-button
+    color="primary"  (click)="login()">Submit</button> -->
+    <button mat-raised-button matTooltip="verify than submit" matTooltipClass="example-tooltip-red" mat-raised-button
+    color="primary"  (click)="openPopup()"[disabled]="!user.valid || fetchingPincodeDetails">Submit</button>
   <br><br>
 </form>
+
+
+<div class="popup" [class.active]="isPopupOpen">
+  <div class="popup-content">
+    <p><strong>Name: </strong>{{ user.get('name').value }} </p>
+    <p><strong>Password:</strong> {{ user.get('password').value }}</p>
+    <p><strong>Mobile Number:</strong>{{ user.get('mob').value }} </p>
+    <p><strong>Email:</strong>{{ user.get('email').value }} </p>
+    <p><strong>Date of Birth:</strong>{{ user.get('dob').value | date:'dd/MM/yyyy' }} </p>
+    <p><strong>Address:</strong> {{ user.get('add').value }}</p>
+    <p><strong>pincode:</strong> {{ user.get('pin').value }}</p>
+    <p><strong>Bloodgroup:</strong>{{ user.get('bld').value }} </p>
+    <p><strong>Branch:</strong> {{ user.get('branch').value }}</p>
+    <div *ngFor="let subjectControl of subject.controls; let i = index">
+      Subject {{ i + 1 }}: {{ subjectControl.get('subject').value }}
+    </div>
+    <!-- <p><strong>Subject:</strong> {{ user.get('subject').value }}</p> -->
+
+    <button (click)="editData(formData)" >Edit</button>
+    
+    <button (click)="closePopup()">Close</button>
+    <button color="primary" (click)="login()">Confirm</button>
+</div>
+</div>
+
+<!-- <button (click)="openPopup()">Open Popup</button> -->
+
+<!-- [disabled]="!user.valid && !fetchingPincodeDetails" -->
